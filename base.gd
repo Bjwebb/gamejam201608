@@ -11,6 +11,7 @@ func _ready():
 	# Initialization here
 	get_node('starting_gear').rotv = 1
 	get_node('starting_gear').starting_gear = true;
+	#get_node('ending_gear').ending_gear = true;
 	gear_scene = load('res://gear.tscn')
 	new_gear()
 

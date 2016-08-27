@@ -5,14 +5,12 @@ var player = false;
 var v_x = 400;
 var v_y = 200;
 var starting_gear = false;
+var ending_gear = false;
 var broken_gear = false;
-var sprite
+var sprite;
 
 func _ready():
 	set_process(true)
-	if (get_name() == 'Sprite1'):
-		rotv = -1
-		player = false;
 	sprite = get_node('sprite')
 
 func get_rotv():

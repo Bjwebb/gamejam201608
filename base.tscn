@@ -1,18 +1,25 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://base.gd" type="Script" id=1]
-[ext_resource path="res://gear.tscn" type="PackedScene" id=2]
+[ext_resource path="res://gear.gd" type="Script" id=2]
+[ext_resource path="res://start.png" type="Texture" id=3]
+[ext_resource path="res://end.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 309.741, 12.9247 )
 
+[sub_resource type="CircleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
 [node name="Node2D" type="Node2D"]
 
 script/script = ExtResource( 1 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="walls" type="StaticBody2D" parent="."]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
@@ -31,14 +38,14 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
 
 transform/pos = Vector2( 196.699, 526.26 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
-[node name="CollisionShape2D1" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D1" type="CollisionShape2D" parent="walls"]
 
 transform/pos = Vector2( -55.4037, 219.964 )
 transform/scale = Vector2( 0.177905, 24.5612 )
@@ -46,7 +53,7 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 1
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls"]
 
 transform/pos = Vector2( 457.217, 219.964 )
 transform/scale = Vector2( 0.177905, 24.5612 )
@@ -54,12 +61,78 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 2
 
-[node name="starting_gear" parent="." instance=ExtResource( 2 )]
+[node name="starting_gear" type="RigidBody2D" parent="."]
 
-transform/pos = Vector2( 367.367, 477.806 )
+transform/pos = Vector2( 40.5337, 478.442 )
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 2.3, 0, 0, 2.3, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 5
+contact_monitor = true
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
+script/script = ExtResource( 2 )
 
-[node name="ending_gear" parent="." instance=ExtResource( 2 )]
+[node name="sprite" type="Sprite" parent="starting_gear"]
 
-transform/pos = Vector2( 39.8077, 481.507 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="starting_gear"]
+
+transform/scale = Vector2( 2.3, 2.3 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="ending_gear" type="RigidBody2D" parent="."]
+
+transform/pos = Vector2( 366.295, 477.96 )
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 2.3, 0, 0, 2.3, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 5
+contact_monitor = true
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
+script/script = ExtResource( 2 )
+
+[node name="sprite" type="Sprite" parent="ending_gear"]
+
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ending_gear"]
+
+transform/scale = Vector2( 2.3, 2.3 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
 
 
