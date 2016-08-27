@@ -38,3 +38,5 @@ func _process(delta):
 				elif (rotv == other_rotv):
 					broken_gear = true
 					rotv = 0
+					sprite.hide()
+					get_node('broken').show()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://base.gd" type="Script" id=1]
 [ext_resource path="res://gear.gd" type="Script" id=2]
 [ext_resource path="res://start.png" type="Texture" id=3]
-[ext_resource path="res://end.png" type="Texture" id=4]
+[ext_resource path="res://broken.png" type="Texture" id=4]
+[ext_resource path="res://end.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -91,6 +92,11 @@ script/script = ExtResource( 2 )
 
 texture = ExtResource( 3 )
 
+[node name="broken" type="Sprite" parent="starting_gear"]
+
+visibility/visible = false
+texture = ExtResource( 4 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="starting_gear"]
 
 transform/scale = Vector2( 2.3, 2.3 )
@@ -126,6 +132,11 @@ script/script = ExtResource( 2 )
 
 [node name="sprite" type="Sprite" parent="ending_gear"]
 
+texture = ExtResource( 5 )
+
+[node name="broken" type="Sprite" parent="ending_gear"]
+
+visibility/visible = false
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ending_gear"]
