@@ -1,9 +1,9 @@
 extends Sprite
 
 var rotv = 1;
-var player = true;
+var player = false;
 var v_x = 400;
-var v_y = 100;
+var v_y = 200;
 
 func _ready():
 	set_process(true)
@@ -13,8 +13,13 @@ func _ready():
 
 func _process(delta):
 	rotate(rotv*delta)
-	if (Input.is_action_pressed("ui_left")):
-		translate(Vector2(-delta*v_x, 0))
-	if (Input.is_action_pressed("ui_right")):
-		translate(Vector2(delta*v_x, 0))
-	translate(Vector2(0, delta*v_y))
+	if (player):
+		if (Input.is_action_pressed("ui_left")):
+			translate(Vector2(-delta*v_x, 0))
+		if (Input.is_action_pressed("ui_right")):
+			translate(Vector2(delta*v_x, 0))
+		translate(Vector2(0, delta*v_y))
+		var pos = get_pos()
+		if (pos.y > 500):
+			player = false;
+			get_parent().new_gear()
