@@ -10,6 +10,7 @@ func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	get_node('starting_gear').rotv = 1
+	get_node('starting_gear').starting_gear = true;
 	gear_scene = load('res://gear.tscn')
 	new_gear()
 
