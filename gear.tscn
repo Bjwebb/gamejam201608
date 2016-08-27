@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="gear" type="KinematicBody2D"]
+[node name="gear" type="RigidBody2D"]
 
 transform/pos = Vector2( 225, 25 )
 input/pickable = false
@@ -17,7 +17,21 @@ shapes/0/transform = Matrix32( 2.3, 0, 0, 2.3, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
-collision/margin = 0.001
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 5
+contact_monitor = true
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
 script/script = ExtResource( 1 )
 
 [node name="sprite" type="Sprite" parent="."]

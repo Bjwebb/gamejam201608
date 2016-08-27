@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends RigidBody2D
 
 var rotv = 0;
 var player = false;
@@ -18,17 +18,16 @@ func get_rotv():
 
 func _process(delta):
 	sprite.rotate(rotv*delta)
-	move(Vector2(0, delta*v_y))
+	var colliders = get_colliding_bodies()
 	if (player):
 		if (Input.is_action_pressed("ui_left")):
-			move(Vector2(-delta*v_x, 0))
+			translate(Vector2(-delta*v_x, 0))
 		if (Input.is_action_pressed("ui_right")):
-			move(Vector2(delta*v_x, 0))
-		if (is_colliding()):
+			translate(Vector2(delta*v_x, 0))
+		if (colliders.size() > 0):
 			player = false;
 			get_parent().new_gear()
-	if (is_colliding()):
-		var collider = get_collider()
+	for collider in colliders:
 		if (collider.has_method('get_rotv')):
 			var other_rotv = collider.get_rotv()
 			if (other_rotv > 0):
