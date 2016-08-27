@@ -10,14 +10,8 @@ script/script = ExtResource( 1 )
 
 [node name="gear" type="Sprite" parent="."]
 
-transform/pos = Vector2( 25, 25 )
-texture = ExtResource( 2 )
-script/script = ExtResource( 3 )
-
-[node name="Sprite1" type="Sprite" parent="."]
-
-transform/pos = Vector2( 72, 25 )
-transform/rot = 22.5
+visibility/visible = false
+transform/pos = Vector2( 225, 25 )
 texture = ExtResource( 2 )
 script/script = ExtResource( 3 )
 

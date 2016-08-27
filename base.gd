@@ -12,5 +12,6 @@ func _ready():
 func new_gear():
 	var gear = get_node('gear').duplicate()
 	gear.player = true;
+	gear.show()
 	add_child(gear)
 
