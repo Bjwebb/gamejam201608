@@ -9,10 +9,12 @@ var gear_scene
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
+	get_node('starting_gear').rotv = 1
 	gear_scene = load('res://gear.tscn')
 	new_gear()
 
 func new_gear():
 	var gear = gear_scene.instance();
+	gear.player = true
 	add_child(gear)
 

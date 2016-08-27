@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-var rotv = 1;
-var player = true;
+var rotv = 0;
+var player = false;
 var v_x = 400;
 var v_y = 200;
 var sprite
@@ -18,16 +18,18 @@ func get_rotv():
 
 func _process(delta):
 	sprite.rotate(rotv*delta)
+	move(Vector2(0, delta*v_y))
 	if (player):
 		if (Input.is_action_pressed("ui_left")):
 			move(Vector2(-delta*v_x, 0))
 		if (Input.is_action_pressed("ui_right")):
 			move(Vector2(delta*v_x, 0))
-		move(Vector2(0, delta*v_y))
-		var pos = get_pos()
 		if (is_colliding()):
 			player = false;
-			var collider = get_collider()
-			if (collider.has_method('get_rotv')):
-				rotv = -collider.get_rotv()
 			get_parent().new_gear()
+	if (is_colliding()):
+		var collider = get_collider()
+		if (collider.has_method('get_rotv')):
+			var other_rotv = collider.get_rotv()
+			if (other_rotv > 0):
+				rotv = -other_rotv
