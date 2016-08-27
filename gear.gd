@@ -13,6 +13,9 @@ func _ready():
 		player = false;
 	sprite = get_node('sprite')
 
+func get_rotv():
+	return rotv
+
 func _process(delta):
 	sprite.rotate(rotv*delta)
 	if (player):
@@ -24,4 +27,7 @@ func _process(delta):
 		var pos = get_pos()
 		if (is_colliding()):
 			player = false;
+			var collider = get_collider()
+			if (collider.has_method('get_rotv')):
+				rotv = -collider.get_rotv()
 			get_parent().new_gear()
