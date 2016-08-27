@@ -5,6 +5,7 @@ var player = false;
 var v_x = 400;
 var v_y = 200;
 var starting_gear = false;
+var broken_gear = false;
 var sprite
 
 func _ready():
@@ -28,12 +29,14 @@ func _process(delta):
 		if (colliders.size() > 0):
 			player = false;
 			get_parent().new_gear()
-	var in_contact_with_moving_gear = false;
+	if !starting_gear:
+		rotv = 0
 	for collider in colliders:
 		if (collider.has_method('get_rotv')):
 			var other_rotv = collider.get_rotv()
 			if (other_rotv != 0):
-				in_contact_with_moving_gear = true;
-				rotv = -other_rotv
-	if !starting_gear and !in_contact_with_moving_gear:
-		rotv = 0
+				if (rotv == 0 and !broken_gear):
+					rotv = -other_rotv
+				elif (rotv == other_rotv):
+					broken_gear = true
+					rotv = 0
