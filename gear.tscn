@@ -51,4 +51,19 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
+[node name="debug_text" type="RichTextLabel" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+custom_colors/default_color = Color( 0.0546875, 1, 0, 1 )
+bbcode/enabled = false
+bbcode/bbcode = "test"
+visible_characters = -1
+
 
