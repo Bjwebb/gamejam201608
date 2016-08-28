@@ -187,4 +187,19 @@ shape = SubResource( 3 )
 trigger = false
 _update_shape_index = 0
 
+[node name="score" type="RichTextLabel" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 343.0
+margin/top = 550.0
+margin/right = 383.0
+margin/bottom = 590.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode/enabled = false
+bbcode/bbcode = "0"
+visible_characters = -1
+
 

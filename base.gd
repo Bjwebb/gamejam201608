@@ -6,15 +6,18 @@ extends Node2D
 
 var gear_scene
 var starting_gear
+var ending_gear
 
 var gears = []
+var score = 0
+var score_f = 0.0
 
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	starting_gear = get_node('starting_gear')
 	starting_gear.starting_gear = true;
-	var ending_gear = get_node('ending_gear')
+	ending_gear = get_node('ending_gear')
 	ending_gear.ending_gear = true;
 	gear_scene = load('res://gear.tscn')
 	gears.append(starting_gear)
@@ -33,3 +36,7 @@ func _process(delta):
 		gear.rotv = 0
 	starting_gear.rotv = 1
 	starting_gear.tree_process()
+	if ending_gear.rotv != 0:
+		score_f += delta * 10
+		score = int(score_f)
+		get_node('score').set_bbcode(str(score))
