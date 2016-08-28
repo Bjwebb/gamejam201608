@@ -23,7 +23,10 @@ func _process(delta):
 		if (Input.is_action_pressed("ui_right")):
 			translate(Vector2(delta*v_x, 0))
 		if (colliders.size() > 0):
-			player = false;
+			player = false
+			var pos = get_pos()
+			if pos.x < 300 and pos.y < 40 and pos.x > 100:
+				get_parent().load_new_level()
 			get_parent().new_gear()
 	if (broken_gear):
 		return
