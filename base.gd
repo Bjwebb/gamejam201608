@@ -33,8 +33,9 @@ func new_gear():
 	player_gear = gear_scene.instance();
 	player_gear.player = true
 	add_child(player_gear)
-	if rand_range(0,3) < 1:
-		player_gear.break_gear()
+	if level == 2:
+		if rand_range(0,3) < 1:
+			player_gear.break_gear()
 	gears.append(player_gear)
 
 func load_new_level():
