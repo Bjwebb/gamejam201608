@@ -2,6 +2,7 @@
 extends Node
 
 var level = 0
+var level_scenes = ['base.tscn', 'base.tscn']
 
 # member variables here, example:
 # var a=2

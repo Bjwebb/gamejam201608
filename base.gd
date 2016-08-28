@@ -37,15 +37,19 @@ func new_gear():
 		player_gear.break_gear()
 	gears.append(player_gear)
 
+func load_new_level():
+	get_tree().change_scene(global.level_scenes[global.level])
+
 func _input(event):
+	var global = get_node('/root/global')
 	if event.is_action_pressed('ui_select'):
-		get_tree().change_scene('res://base.tscn')
+		load_new_level()
 	elif event.is_action_pressed('ui_page_up'):
-		get_node('/root/global').level += 1
-		get_tree().change_scene('res://base.tscn')
+		global.level += 1
+		load_new_level()
 	elif event.is_action_pressed('ui_page_down'):
-		get_node('/root/global').level -= 1
-		get_tree().change_scene('res://base.tscn')
+		global.level -= 1
+		load_new_level()
 
 func _process(delta):
 	for gear in gears:
@@ -56,7 +60,7 @@ func _process(delta):
 	if ending_gear.rotv != 0:
 		time_done += delta
 		if time_done > 1.5:
-			get_node('/root/global').level += 1
-			get_tree().change_scene('res://base.tscn')
+			global.level += 1
+			load_new_level()
 	else:
 		time_done = 0
