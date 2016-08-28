@@ -29,6 +29,8 @@ func new_gear():
 	var gear = gear_scene.instance();
 	gear.player = true
 	add_child(gear)
+	if rand_range(0,3) < 1:
+		gear.break_gear()
 	gears.append(gear)
 
 func _process(delta):
