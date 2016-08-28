@@ -129,7 +129,7 @@ _update_shape_index = 0
 
 [node name="ending_gear" type="RigidBody2D" parent="."]
 
-transform/pos = Vector2( 240.767, 480.75 )
+transform/pos = Vector2( 102.142, 477.409 )
 input/pickable = false
 shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 2.2, 0, 0, 2.2, 0, 0 )
