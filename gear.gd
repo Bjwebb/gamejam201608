@@ -8,13 +8,13 @@ var starting_gear = false;
 var ending_gear = false;
 var broken_gear = false;
 var sprite;
+var driver;
+var driver_number = -1;
+var parent_gears = [];
 
 func _ready():
 	set_process(true)
 	sprite = get_node('sprite')
-
-func get_rotv():
-	return rotv
 
 func _process(delta):
 	sprite.rotate(rotv*delta)
@@ -27,16 +27,31 @@ func _process(delta):
 		if (colliders.size() > 0):
 			player = false;
 			get_parent().new_gear()
-	if !starting_gear:
-		rotv = 0
+	if (broken_gear):
+		return
+	var new_parent_gears = []
 	for collider in colliders:
-		if (collider.has_method('get_rotv')):
-			var other_rotv = collider.get_rotv()
-			if (other_rotv != 0):
-				if (rotv == 0 and !broken_gear):
-					rotv = -other_rotv
-				elif (rotv == other_rotv):
-					broken_gear = true
-					rotv = 0
-					sprite.hide()
-					get_node('broken').show()
+		if (collider.has_method('break_gear')):
+			if collider.broken_gear:
+				continue
+			if collider in parent_gears:
+				if collider.driver_number >= 0:
+					new_parent_gears.append(collider)
+			elif collider.driver_number < driver_number:
+				collider.parent_gears.append(self)
+				if collider.driver_number >= 0 and driver_number%2 != collider.driver_number%2:
+					collider.break_gear()
+				collider.driver_number = driver_number + 1
+	parent_gears = new_parent_gears
+	if !starting_gear and parent_gears.size() == 0:
+		rotv = 0
+		driver_number = -1
+	else:
+		print(driver_number)
+		rotv = -1 + (driver_number%2)*2
+
+func break_gear():
+	broken_gear = true
+	rotv = 0
+	sprite.hide()
+	get_node('broken').show()
