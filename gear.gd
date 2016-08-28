@@ -9,8 +9,6 @@ var ending_gear = false;
 var broken_gear = false;
 var sprite;
 var driver;
-var driver_number = -1;
-var parent_gears = [];
 
 func _ready():
 	set_process(true)
@@ -29,30 +27,20 @@ func _process(delta):
 			get_parent().new_gear()
 	if (broken_gear):
 		return
-	var new_parent_gears = []
-	if !starting_gear and !ending_gear:
-		get_node('debug_text').set_bbcode(str(driver_number))
+
+func tree_process():
+	if broken_gear:
+		return
+	var colliders = get_colliding_bodies()
 	for collider in colliders:
-		if (collider.has_method('break_gear')):
+		if (collider.has_method('tree_process')):
 			if collider.broken_gear:
 				continue
-			if collider in parent_gears:
-				if collider.driver_number >= 0:
-					new_parent_gears.append(collider)
-			elif collider.driver_number < driver_number:
-				if collider.driver_number >= 0 and driver_number%2 != collider.driver_number%2:
-					collider.break_gear()
-				if check_parents_of_parents(collider):
-					continue
-				collider.parent_gears.append(self)
-				collider.driver_number = driver_number + 1
-	parent_gears = new_parent_gears
-	if !starting_gear and parent_gears.size() == 0:
-		rotv = 0
-		driver_number = -1
-	else:
-		print(driver_number)
-		rotv = -1 + (driver_number%2)*2
+			if collider.rotv == 0:
+				collider.rotv = -rotv
+				collider.tree_process()
+			elif rotv != -collider.rotv:
+				collider.break_gear()
 
 func break_gear():
 	broken_gear = true
@@ -60,9 +48,3 @@ func break_gear():
 	sprite.hide()
 	get_node('broken').show()
 
-func check_parents_of_parents(collider):
-	for parent in parent_gears:
-		if collider in parent.parent_gears:
-			return true
-		parent.check_parents_of_parents(collider)
-	return false
