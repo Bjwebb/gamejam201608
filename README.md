@@ -2,6 +2,8 @@
 
 Created as part of JamBridge for Ludum Dare 36 (theme: Ancient Technology). Made with the open source [Godot engine](https://godotengine.org/).
 
+![screenshot](screenshot.png)
+
 ## Download
 
 [Linux](http://bjwebb.co.uk/files/godot_export/gamejam201608.bin)
