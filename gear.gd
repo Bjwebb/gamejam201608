@@ -29,10 +29,10 @@ func _process(delta):
 		return
 
 func tree_process():
-	if broken_gear or rotv == 0:
-		return
 	var colliders = get_node('halo').get_overlapping_bodies()
 	for collider in colliders:
+		if broken_gear or rotv == 0:
+			return
 		if (collider.has_method('tree_process')):
 			if collider.broken_gear or collider == self:
 				continue
